@@ -7,4 +7,9 @@
 ## 关于 PureComponent
 
 1. 只会对比第一级的数据
-2. 如果传入的是匿名函数则对比将无效化，永远会渲染
+2. 如果传入的是匿名函数则对比将无效化，永远会渲染，因为一个新函数不会等于另外一个新函数
+
+## 使用 HOOKS 得注意事项
+
+1. hooks 得初始化是按声明顺序顺序执行的
+2. 为了防止使用 hooks 出错，使用 `eslint-plugin-react-hooks` 进行规范化处理，需要配置 `package.json` 的 `eslintConfig` 项

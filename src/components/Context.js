@@ -8,7 +8,7 @@ class Floor extends Component {
   render () {
     const state = this.context
     return (
-      <h1>{state.count}</h1>
+      <h3>{state.count}</h3>
     )
   }
 }
@@ -28,7 +28,7 @@ export default class Content extends Component {
     const state = { ...this.state }
     return (
       <Context.Provider value={state}>
-        <button onClick={() => this.setState({ count: --state.count })}>点击</button>
+        <button onClick={() => this.setState({ count: --state.count })}>点击 -1</button>
         <Middle></Middle>
       </Context.Provider>
     )
