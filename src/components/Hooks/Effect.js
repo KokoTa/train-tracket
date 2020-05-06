@@ -2,7 +2,7 @@ import React, { useState, useEffect, createContext, useContext, useMemo, memo, u
 /*
  * @Author: KokoTa
  * @Date: 2020-04-30 15:06:54
- * @LastEditTime: 2020-05-03 22:20:49
+ * @LastEditTime: 2020-05-06 10:00:48
  * @Description: Hooks 示例
  * Hooks 常见问题
  * 1. 声明周期如何映射到 Hooks：useEffect 的不同使用映射了 mount update unmount 的生命周期，函数声明本身就可以当作在 getDerivedProps 中，snap 和 error 还无法映射
@@ -48,7 +48,7 @@ function useSize () {
 
   useEffect(() => {
     window.addEventListener('resize', onResize)
-    return () => window.removeEventListener('resize')
+    return () => window.removeEventListener('resize', onResize)
   }, [])
 
   return [size, setSize]
