@@ -13,3 +13,15 @@
 
 1. hooks 得初始化是按声明顺序顺序执行的
 2. 为了防止使用 hooks 出错，使用 `eslint-plugin-react-hooks` 进行规范化处理，需要配置 `package.json` 的 `eslintConfig` 项
+
+## PWA 组成技术
+
+Service Worker
+
+Promise
+
+fetch
+
+cache API
+
+Notification API
