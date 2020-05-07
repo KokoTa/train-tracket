@@ -26,7 +26,10 @@ export default class MemoWrap extends Component {
   add = () => {
     const user = this.state.user
     user.age++
-    this.setState({ user })
+    this.setState((state, props) => {
+      console.log(state, props)
+      return { user }
+    })
   }
 
   render () {

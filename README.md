@@ -25,3 +25,10 @@ fetch
 cache API
 
 Notification API
+
+## React SPA 改成 MPA
+
+添加对应的 entry 和 html
+
+1. 见 config/paths.js 的 // * ... 注释
+2. 见 config/webpack.config.js // * ... 注释
