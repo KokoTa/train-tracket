@@ -7,13 +7,14 @@ import DepartDate from './components/DepartDate'
 import HighSpeed from './components/HighSpeed'
 import Submit from './components/Submit'
 import propTypes from 'prop-types'
-import { exchangeFromTo, showCitySelector } from './actions'
+import { exchangeFromTo, showCitySelector, hideCitySelector, fetchCityData } from './actions'
 import { bindActionCreators } from 'redux'
+import CitySelector from '../common/CitySelector'
 
 function App (props) {
   // 用于检测是否有不必要的重复渲染
   const [count, setCount] = useState(0)
-  const { from, to, dispatch } = props
+  const { from, to, dispatch, isCitySelectorVisible, cityData, isLoadingCityData } = props
 
   const onBack = useCallback(() => {
     window.history.back()
@@ -25,9 +26,16 @@ function App (props) {
   const cbs = useMemo(() => {
     return bindActionCreators({
       exchangeFromTo,
-      showCitySelector
+      showCitySelector,
+      hideCitySelector
     },
     dispatch)
+  }, [])
+  const citySelectorCbs = useMemo(() => {
+    return bindActionCreators({
+      onBack: hideCitySelector,
+      fetchCityData
+    }, dispatch)
   }, [])
 
   return (
@@ -38,8 +46,11 @@ function App (props) {
       <DepartDate></DepartDate>
       <HighSpeed></HighSpeed>
       <Submit></Submit>
+
       {count}
       <button onClick={() => setCount(count + 1)}>+1</button>
+
+      <CitySelector show={isCitySelectorVisible} cityData={cityData} isLoading={isLoadingCityData} {...citySelectorCbs}></CitySelector>
     </div>
   )
 }
@@ -47,7 +58,10 @@ function App (props) {
 App.propTypes = {
   from: propTypes.string,
   to: propTypes.string,
-  dispatch: propTypes.func
+  dispatch: propTypes.func,
+  isCitySelectorVisible: propTypes.bool,
+  cityData: propTypes.array,
+  isLoadingCityData: propTypes.bool
 }
 
 export default connect(

@@ -1,0 +1,28 @@
+.city-selector {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background: white;
+
+  .head {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    background-color: lightblue;
+    .back {
+      color: white;
+      padding: 0 10px;
+    }
+    .delete {
+      color: white;
+      padding: 0 10px;
+    }
+  }
+}
+
+.hide-selector {
+  display: none;
+}

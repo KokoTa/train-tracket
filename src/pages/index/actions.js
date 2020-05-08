@@ -1,9 +1,11 @@
 /*
  * @Author: KokoTa
  * @Date: 2020-05-07 17:07:15
- * @LastEditTime: 2020-05-08 14:26:01
+ * @LastEditTime: 2020-05-08 17:56:43
  * @Description:
  */
+import axios from 'axios'
+
 export const ACTION_SET_FROM = 'ACTION_SET_FROM'
 export const ACTION_SET_TO = 'ACTION_SET_TO'
 export const ACTION_SET_IS_CITY_SELECTOR_VISIBLE = 'ACTION_SET_IS_CITY_SELECTOR_VISIBLE'
@@ -103,5 +105,22 @@ export function exchangeFromTo () {
     const { from, to } = getState()
     dispatch(setFrom(to))
     dispatch(setTo(from))
+  }
+}
+
+export function fetchCityData () {
+  return async (dispatch, getState) => {
+    const { isLoadingCityData } = getState()
+
+    if (isLoadingCityData) return
+    dispatch(setIsLoadingCityData(true))
+
+    try {
+      const res = await axios.get('/cities')
+      dispatch(setCityData(res.data))
+      dispatch(setIsLoadingCityData(false))
+    } catch (error) {
+      dispatch(setIsLoadingCityData(false))
+    }
   }
 }
