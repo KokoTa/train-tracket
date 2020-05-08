@@ -60,12 +60,14 @@ module.exports = {
   appQueryHtml: resolveApp('public/query.html'),
   appTicketHtml: resolveApp('public/ticket.html'),
   appOrderHtml: resolveApp('public/order.html'),
+  appTestHtml: resolveApp('public/test.html'),
 
   // * 增加入口
   appIndexJs: resolveModule(resolveApp, 'src/pages/index/index'),
   appQueryJs: resolveModule(resolveApp, 'src/pages/query/index'),
   appTicketJs: resolveModule(resolveApp, 'src/pages/ticket/index'),
   appOrderJs: resolveModule(resolveApp, 'src/pages/order/index'),
+  appTestJs: resolveModule(resolveApp, 'src/pages/test/index'),
 
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),

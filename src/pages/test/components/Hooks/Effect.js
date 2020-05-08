@@ -2,7 +2,7 @@ import React, { useState, useEffect, createContext, useContext, useMemo, memo, u
 /*
  * @Author: KokoTa
  * @Date: 2020-04-30 15:06:54
- * @LastEditTime: 2020-05-06 10:00:48
+ * @LastEditTime: 2020-05-08 11:49:30
  * @Description: Hooks 示例
  * Hooks 常见问题
  * 1. 声明周期如何映射到 Hooks：useEffect 的不同使用映射了 mount update unmount 的生命周期，函数声明本身就可以当作在 getDerivedProps 中，snap 和 error 还无法映射
@@ -81,6 +81,7 @@ export default function Effect () {
   // 改变 count 或其他值，会导致 Effect 函数重新执行，此时 subTitleClick 也会重新被赋值，导致传入 SubTitle 的函数不同，导致重复渲染 SubTitle 组件
   // 这里使用 useMemo 让函数唯一初始化
   // 如果返回的是函数，则 useCallback 是 useMemo 的简化
+  // 除了使用 useCallback 和 useMemo，还需要配合 memo 包装函数组件才能解决重复渲染的问题
   // react 可以保证 setState 函数的唯一性，并且 setState 函数传递的参数是实时值，因此可以不用在 [] 中添加依赖
   // const subTitleClick = () => console.log('subTitle click') // bad
   // const subTitleClick = useMemo(() => () => console.log('subTitle click'), []) // bad
