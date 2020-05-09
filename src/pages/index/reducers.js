@@ -1,7 +1,7 @@
 /*
  * @Author: KokoTa
  * @Date: 2020-05-07 17:07:36
- * @LastEditTime: 2020-05-08 10:48:59
+ * @LastEditTime: 2020-05-09 17:29:44
  * @Description:
  */
 import {
@@ -12,7 +12,8 @@ import {
   ACTION_SET_CITY_DATA,
   ACTION_SET_IS_LOADING_CITY_DATA,
   ACTION_SET_IS_DATE_SELECTOR_VISIBLE,
-  ACTION_SET_IS_HIGH_SPEED
+  ACTION_SET_IS_HIGH_SPEED,
+  ACTION_SET_DEPART_TIME
 } from './actions'
 
 export default {
@@ -98,6 +99,17 @@ export default {
 
     switch (type) {
       case ACTION_SET_IS_HIGH_SPEED:
+        return payload
+      default:
+    }
+
+    return state
+  },
+  departTime (state = Date.now(), action) {
+    const { type, payload } = action
+
+    switch (type) {
+      case ACTION_SET_DEPART_TIME:
         return payload
       default:
     }

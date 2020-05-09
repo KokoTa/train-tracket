@@ -12,7 +12,8 @@ import {
   showCitySelector,
   hideCitySelector,
   fetchCityData,
-  setSelectedCity
+  setSelectedCity,
+  showDateSelector
 } from './actions'
 import { bindActionCreators } from 'redux'
 import CitySelector from '../common/CitySelector'
@@ -20,7 +21,7 @@ import CitySelector from '../common/CitySelector'
 function App (props) {
   // 用于检测是否有不必要的重复渲染
   const [count, setCount] = useState(0)
-  const { from, to, dispatch, isCitySelectorVisible, cityData, isLoadingCityData } = props
+  const { from, to, dispatch, isCitySelectorVisible, cityData, isLoadingCityData, departTime } = props
 
   const onBack = useCallback(() => {
     window.history.back()
@@ -37,6 +38,7 @@ function App (props) {
     },
     dispatch)
   }, [])
+
   const citySelectorCbs = useMemo(() => {
     return bindActionCreators({
       onBack: hideCitySelector,
@@ -45,18 +47,24 @@ function App (props) {
     }, dispatch)
   }, [])
 
+  const departDateCbs = useMemo(() => {
+    return bindActionCreators({
+      onClick: showDateSelector
+    }, dispatch)
+  }, [])
+
   return (
     <div>
       <Header title="火车票" onBack={onBack}></Header>
-      <Journey from={from} to={to} {...cbs}>
-      </Journey>
-      <DepartDate></DepartDate>
+      <Journey from={from} to={to} {...cbs}></Journey>
+      <DepartDate time={departTime} {...departDateCbs}></DepartDate>
       <HighSpeed></HighSpeed>
       <Submit></Submit>
 
       {count}
       <button onClick={() => setCount(count + 1)}>+1</button>
 
+      {/* 城市选择组件 */}
       <CitySelector show={isCitySelectorVisible} cityData={cityData} isLoading={isLoadingCityData} {...citySelectorCbs}></CitySelector>
     </div>
   )
@@ -68,7 +76,8 @@ App.propTypes = {
   dispatch: propTypes.func,
   isCitySelectorVisible: propTypes.bool,
   cityData: propTypes.object,
-  isLoadingCityData: propTypes.bool
+  isLoadingCityData: propTypes.bool,
+  departTime: propTypes.number
 }
 
 export default connect(

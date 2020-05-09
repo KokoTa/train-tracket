@@ -1,7 +1,7 @@
 /*
  * @Author: KokoTa
  * @Date: 2020-05-07 17:07:15
- * @LastEditTime: 2020-05-09 10:03:45
+ * @LastEditTime: 2020-05-09 17:19:14
  * @Description:
  */
 import axios from 'axios'
@@ -14,6 +14,7 @@ export const ACTION_SET_CITY_DATA = 'ACTION_SET_CITY_DATA'
 export const ACTION_SET_IS_LOADING_CITY_DATA = 'ACTION_SET_IS_LOADING_CITY_DATA'
 export const ACTION_SET_IS_DATE_SELECTOR_VISIBLE = 'ACTION_SET_IS_DATE_SELECTOR_VISIBLE'
 export const ACTION_SET_IS_HIGH_SPEED = 'ACTION_SET_IS_HIGH_SPEED'
+export const ACTION_SET_DEPART_TIME = 'ACTION_SET_DEPART_TIME'
 
 export function setFrom (from) {
   return {
@@ -98,6 +99,13 @@ export function hideDateSelector () {
   return {
     type: ACTION_SET_IS_DATE_SELECTOR_VISIBLE,
     payload: false
+  }
+}
+
+export function setDepartTime (departTime) {
+  return {
+    type: ACTION_SET_DEPART_TIME,
+    payload: departTime
   }
 }
 
