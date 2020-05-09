@@ -4,6 +4,7 @@ import propTypes from 'prop-types'
 import classnames from 'classnames'
 import CityList from './CityList'
 import AlphaIndex from './AlphaIndex'
+import SearchSuggest from './SearchSuggest'
 
 function CitySelector (props) {
   const { show, cityData, isLoading, onBack, fetchCityData, onSelect } = props
@@ -37,6 +38,11 @@ function CitySelector (props) {
     listElement.scrollTo(0, top - headElement.offsetHeight)
   }, [])
 
+  const searchSuggestSelect = useCallback((suggestKeyword) => {
+    onSelect(suggestKeyword)
+    setKeyword('')
+  })
+
   return (
     <div className={classnames('city-selector', { 'hide-selector': !show })}>
       <div className="head" ref={headRef}>
@@ -44,8 +50,13 @@ function CitySelector (props) {
         <input type="text" value={keyword} onChange={e => setKeyword(e.target.value)} placeholder="搜索城市"/>
         { key.length > 0 ? <span className="delete" onClick={() => setKeyword('')}>x</span> : null }
       </div>
+
       {showCityList()}
+
       <AlphaIndex onClick={toAlpha}></AlphaIndex>
+
+      { key.length > 0 ? <SearchSuggest keyword={keyword} cityData={cityData} onSelect={searchSuggestSelect}></SearchSuggest> : null }
+
     </div>
   )
 }

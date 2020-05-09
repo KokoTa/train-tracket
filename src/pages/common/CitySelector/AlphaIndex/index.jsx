@@ -6,7 +6,6 @@ const alphaData = Array.from(new Array(26), (element, index) => String.fromCharC
 
 function AlphaIndex (props) {
   const { onClick } = props
-  console.log(1)
 
   return (
     <div className="alpha-list">
