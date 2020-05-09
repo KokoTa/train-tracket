@@ -7,7 +7,13 @@ import DepartDate from './components/DepartDate'
 import HighSpeed from './components/HighSpeed'
 import Submit from './components/Submit'
 import propTypes from 'prop-types'
-import { exchangeFromTo, showCitySelector, hideCitySelector, fetchCityData } from './actions'
+import {
+  exchangeFromTo,
+  showCitySelector,
+  hideCitySelector,
+  fetchCityData,
+  setSelectedCity
+} from './actions'
 import { bindActionCreators } from 'redux'
 import CitySelector from '../common/CitySelector'
 
@@ -34,7 +40,8 @@ function App (props) {
   const citySelectorCbs = useMemo(() => {
     return bindActionCreators({
       onBack: hideCitySelector,
-      fetchCityData
+      fetchCityData,
+      onSelect: setSelectedCity
     }, dispatch)
   }, [])
 
@@ -60,7 +67,7 @@ App.propTypes = {
   to: propTypes.string,
   dispatch: propTypes.func,
   isCitySelectorVisible: propTypes.bool,
-  cityData: propTypes.array,
+  cityData: propTypes.object,
   isLoadingCityData: propTypes.bool
 }
 

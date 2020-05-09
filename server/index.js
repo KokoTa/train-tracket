@@ -1,7 +1,7 @@
 /*
  * @Author: KokoTa
  * @Date: 2020-05-07 19:37:56
- * @LastEditTime: 2020-05-08 17:24:49
+ * @LastEditTime: 2020-05-09 11:18:14
  * @Description: Mock 服务器，代理配置写在 pacakge.json 中
  */
 
@@ -16,34 +16,61 @@ app.get('/cities', (req, res) => {
         cities: [{ name: '北京' }]
       },
       {
-        title: '福建省',
+        title: 'A',
         cities: [
-          { name: '福州' },
-          { name: '泉州' },
-          { name: '厦门' },
-          { name: '漳州' }
+          { name: 'A州' },
+          { name: 'AA州' },
+          { name: 'AAA门' },
+          { name: 'AAAA州' }
         ]
       },
       {
-        title: '福建省',
+        title: 'B',
         cities: [
-          { name: '福州' },
-          { name: '泉州' },
-          { name: '厦门' },
-          { name: '漳州' }
+          { name: 'B州' },
+          { name: 'BB州' },
+          { name: 'BBB门' },
+          { name: 'BBBB州' }
         ]
       },
       {
-        title: '福建省',
+        title: 'C',
         cities: [
-          { name: '福州' },
-          { name: '泉州' },
-          { name: '厦门' },
-          { name: '漳州' }
+          { name: 'C州' },
+          { name: 'CC州' },
+          { name: 'CCC门' },
+          { name: 'CCCC州' }
         ]
       },
       {
-        title: '福建省',
+        title: 'D',
+        cities: [
+          { name: 'D州' },
+          { name: 'DD州' },
+          { name: 'DDD门' },
+          { name: 'DDDD州' }
+        ]
+      },
+      {
+        title: 'E',
+        cities: [
+          { name: 'E州' },
+          { name: 'EE州' },
+          { name: 'EEE门' },
+          { name: 'EEEE州' }
+        ]
+      },
+      {
+        title: 'F',
+        cities: [
+          { name: 'F州' },
+          { name: 'FF州' },
+          { name: 'FFF门' },
+          { name: 'FFFF州' }
+        ]
+      },
+      {
+        title: 'G',
         cities: [
           { name: '福州' },
           { name: '泉州' },

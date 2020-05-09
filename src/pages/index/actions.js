@@ -1,7 +1,7 @@
 /*
  * @Author: KokoTa
  * @Date: 2020-05-07 17:07:15
- * @LastEditTime: 2020-05-08 17:56:43
+ * @LastEditTime: 2020-05-09 10:03:45
  * @Description:
  */
 import axios from 'axios'
@@ -83,6 +83,7 @@ export function setSelectedCity (city) {
     } else {
       dispatch(setTo(city))
     }
+    dispatch(hideCitySelector())
   }
 }
 
