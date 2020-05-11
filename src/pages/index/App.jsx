@@ -6,22 +6,26 @@ import Journey from './components/Journey'
 import DepartDate from './components/DepartDate'
 import HighSpeed from './components/HighSpeed'
 import Submit from './components/Submit'
-import propTypes from 'prop-types'
+import PropTypes from 'prop-types'
 import {
   exchangeFromTo,
   showCitySelector,
   hideCitySelector,
   fetchCityData,
   setSelectedCity,
-  showDateSelector
+  showDateSelector,
+  hideDateSelector,
+  setDepartTime
 } from './actions'
 import { bindActionCreators } from 'redux'
 import CitySelector from '../common/CitySelector'
+import DateSelector from '../common/DateSelector'
+import { setTimeZero } from '../common/libs/util'
 
 function App (props) {
   // 用于检测是否有不必要的重复渲染
   const [count, setCount] = useState(0)
-  const { from, to, dispatch, isCitySelectorVisible, cityData, isLoadingCityData, departTime } = props
+  const { from, to, dispatch, isCitySelectorVisible, cityData, isLoadingCityData, departTime, isDateSelectorVisible } = props
 
   const onBack = useCallback(() => {
     window.history.back()
@@ -53,6 +57,19 @@ function App (props) {
     }, dispatch)
   }, [])
 
+  const dateSelectorCbs = useMemo(() => {
+    return bindActionCreators({
+      onBack: hideDateSelector
+    }, dispatch)
+  }, [])
+
+  const onSelectDate = useCallback((dayTime) => {
+    if (!dayTime) return // 没有日期
+    if (dayTime < setTimeZero()) return // 选择的时间小于今天
+    dispatch(setDepartTime(dayTime))
+    dispatch(hideDateSelector())
+  }, [])
+
   return (
     <div>
       <Header title="火车票" onBack={onBack}></Header>
@@ -66,18 +83,21 @@ function App (props) {
 
       {/* 城市选择组件 */}
       <CitySelector show={isCitySelectorVisible} cityData={cityData} isLoading={isLoadingCityData} {...citySelectorCbs}></CitySelector>
+      {/* 日期选择组件 */}
+      <DateSelector show={isDateSelectorVisible} onSelect={onSelectDate} {...dateSelectorCbs}></DateSelector>
     </div>
   )
 }
 
 App.propTypes = {
-  from: propTypes.string,
-  to: propTypes.string,
-  dispatch: propTypes.func,
-  isCitySelectorVisible: propTypes.bool,
-  cityData: propTypes.object,
-  isLoadingCityData: propTypes.bool,
-  departTime: propTypes.number
+  from: PropTypes.string,
+  to: PropTypes.string,
+  dispatch: PropTypes.func,
+  isCitySelectorVisible: PropTypes.bool,
+  cityData: PropTypes.object,
+  isLoadingCityData: PropTypes.bool,
+  departTime: PropTypes.number,
+  isDateSelectorVisible: PropTypes.bool
 }
 
 export default connect(

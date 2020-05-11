@@ -1,3 +1,9 @@
+/*
+ * @Author: KokoTa
+ * @Date: 2020-05-08 15:08:34
+ * @LastEditTime: 2020-05-11 09:59:37
+ * @Description: 城市选择组件
+ */
 import React, { memo, useState, useMemo, useEffect, useCallback, useRef } from 'react'
 import './index.scss'
 import propTypes from 'prop-types'
@@ -46,7 +52,7 @@ function CitySelector (props) {
   return (
     <div className={classnames('city-selector', { 'hide-selector': !show })}>
       <div className="head" ref={headRef}>
-        <span className="back" onClick={onBack}>返回</span>
+        <span className="back" onClick={onBack}>&lt;</span>
         <input type="text" value={keyword} onChange={e => setKeyword(e.target.value)} placeholder="搜索城市"/>
         { key.length > 0 ? <span className="delete" onClick={() => setKeyword('')}>x</span> : null }
       </div>
