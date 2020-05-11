@@ -15,7 +15,8 @@ import {
   setSelectedCity,
   showDateSelector,
   hideDateSelector,
-  setDepartTime
+  setDepartTime,
+  toggleHighSpeed
 } from './actions'
 import { bindActionCreators } from 'redux'
 import CitySelector from '../common/CitySelector'
@@ -25,7 +26,7 @@ import { setTimeZero } from '../common/libs/util'
 function App (props) {
   // 用于检测是否有不必要的重复渲染
   const [count, setCount] = useState(0)
-  const { from, to, dispatch, isCitySelectorVisible, cityData, isLoadingCityData, departTime, isDateSelectorVisible } = props
+  const { from, to, dispatch, isCitySelectorVisible, cityData, isLoadingCityData, departTime, isDateSelectorVisible, isHighSpeed } = props
 
   const onBack = useCallback(() => {
     window.history.back()
@@ -34,7 +35,9 @@ function App (props) {
   // 这样写太麻烦了，可以用 useMemo + bindActionCreators 来简化
   // const doExchangeFromTo = useCallback(() => dispatch(exchangeFromTo()), [])
   // const doShowCitySelector = useCallback((bool) => dispatch(showCitySelector(bool)), [])
-  const cbs = useMemo(() => {
+
+  // 城市选择器函数
+  const cityCbs = useMemo(() => {
     return bindActionCreators({
       exchangeFromTo,
       showCitySelector,
@@ -42,7 +45,6 @@ function App (props) {
     },
     dispatch)
   }, [])
-
   const citySelectorCbs = useMemo(() => {
     return bindActionCreators({
       onBack: hideCitySelector,
@@ -51,18 +53,17 @@ function App (props) {
     }, dispatch)
   }, [])
 
+  // 日期选择器函数
   const departDateCbs = useMemo(() => {
     return bindActionCreators({
       onClick: showDateSelector
     }, dispatch)
   }, [])
-
   const dateSelectorCbs = useMemo(() => {
     return bindActionCreators({
       onBack: hideDateSelector
     }, dispatch)
   }, [])
-
   const onSelectDate = useCallback((dayTime) => {
     if (!dayTime) return // 没有日期
     if (dayTime < setTimeZero()) return // 选择的时间小于今天
@@ -70,12 +71,19 @@ function App (props) {
     dispatch(hideDateSelector())
   }, [])
 
+  // 列车类型切换函数
+  const highSpeedCbs = useMemo(() => {
+    return bindActionCreators({
+      toggle: toggleHighSpeed
+    }, dispatch)
+  }, [])
+
   return (
     <div>
       <Header title="火车票" onBack={onBack}></Header>
-      <Journey from={from} to={to} {...cbs}></Journey>
+      <Journey from={from} to={to} {...cityCbs}></Journey>
       <DepartDate time={departTime} {...departDateCbs}></DepartDate>
-      <HighSpeed></HighSpeed>
+      <HighSpeed isHighSpeed={isHighSpeed} {...highSpeedCbs}></HighSpeed>
       <Submit></Submit>
 
       {count}
@@ -97,7 +105,8 @@ App.propTypes = {
   cityData: PropTypes.object,
   isLoadingCityData: PropTypes.bool,
   departTime: PropTypes.number,
-  isDateSelectorVisible: PropTypes.bool
+  isDateSelectorVisible: PropTypes.bool,
+  isHighSpeed: PropTypes.bool
 }
 
 export default connect(

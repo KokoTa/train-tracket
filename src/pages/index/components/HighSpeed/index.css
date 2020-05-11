@@ -1,0 +1,12 @@
+.high-speed {
+  display: flex;
+  margin: 10px 0;
+}
+
+.high-speed div {
+  flex: 1;
+}
+
+.high-speed .select {
+  color: red;
+}

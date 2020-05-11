@@ -1,7 +1,7 @@
 /*
  * @Author: KokoTa
  * @Date: 2020-05-07 17:07:15
- * @LastEditTime: 2020-05-09 17:19:14
+ * @LastEditTime: 2020-05-11 15:19:43
  * @Description:
  */
 import axios from 'axios'
@@ -46,10 +46,10 @@ export function setCityData (cityData) {
 
 export function toggleHighSpeed () {
   return (dispatch, getState) => {
-    const { highSpeed } = getState()
+    const { isHighSpeed } = getState()
     dispatch({
       type: ACTION_SET_IS_HIGH_SPEED,
-      payload: !highSpeed
+      payload: !isHighSpeed
     })
   }
 }
