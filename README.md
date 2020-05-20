@@ -34,3 +34,11 @@ Notification API
 2. 见 config/webpack.config.js // * ... 注释
 
 [具体文章](https://blog.csdn.net/q1519187064/article/details/105842481)
+
+[番外：Vue MPA 配置](http://blog.poetries.top/2019/06/01/vue-muti-page-config/)
+
+## 关于 iconfont 显示
+
+HTML 使用：`&#xf065;`
+
+JS 使用：`\uf065`

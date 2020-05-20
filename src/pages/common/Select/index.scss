@@ -1,0 +1,17 @@
+.select {
+  display: flex;
+  align-items: center;
+
+  .select-item {
+    padding: 5px 10px;
+    border: 1px solid #eee;
+    margin: 5px;
+  }
+  .select-show {
+    color: green;
+  }
+
+  .selected {
+    background-color: lightblue;
+  }
+}
