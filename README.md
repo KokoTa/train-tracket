@@ -62,3 +62,9 @@ eslint 大部分还是用来格式化 js/jsx
 prettier 可以格式化更多种类型的文件，但是会和 eslint 冲突，需要统一规则
 
 这就仁者见仁智者见智了
+
+## 性能分析
+
+1. 使用 `webpack-bundle-analyzer`，配置见 `config/webpack.config.js` 中的 `BundleAnalyzerPlugin` 字段
+2. 可以修改 `publicPath` 来让静态资源指向 CDN 地址
+3. 可以导入 `serviceWorker` 缓存资源

@@ -24,6 +24,8 @@ const getClientEnvironment = require('./env')
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin')
 const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpackPlugin')
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter')
+// * 打包分析插件
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 const postcssNormalize = require('postcss-normalize')
 
@@ -35,7 +37,7 @@ const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false'
 // makes for a smoother build process.
 const shouldInlineRuntimeChunk = process.env.INLINE_RUNTIME_CHUNK !== 'false'
 
-const isExtendingEslintConfig = process.env.EXTEND_ESLINT === 'true'
+// const isExtendingEslintConfig = process.env.EXTEND_ESLINT === 'true'
 
 const imageInlineSizeLimit = parseInt(
   process.env.IMAGE_INLINE_SIZE_LIMIT || '10000'
@@ -498,6 +500,11 @@ module.exports = function (webpackEnv) {
       ]
     },
     plugins: [
+      // * 打包分析插件
+      new BundleAnalyzerPlugin({
+        openAnalyzer: 9999,
+        analyzerMode: 'static'
+      }),
       // Generates an `index.html` file with the <script> injected.
       // * 新增 html
       new HtmlWebpackPlugin(
