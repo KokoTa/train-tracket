@@ -2,7 +2,7 @@ import React, { useState, useEffect, createContext, useContext, useMemo, memo, u
 /*
  * @Author: KokoTa
  * @Date: 2020-04-30 15:06:54
- * @LastEditTime: 2020-05-08 11:49:30
+ * @LastEditTime: 2020-05-21 17:47:54
  * @Description: Hooks 示例
  * Hooks 常见问题
  * 1. 声明周期如何映射到 Hooks：useEffect 的不同使用映射了 mount update unmount 的生命周期，函数声明本身就可以当作在 getDerivedProps 中，snap 和 error 还无法映射
@@ -13,6 +13,7 @@ import React, { useState, useEffect, createContext, useContext, useMemo, memo, u
 import propTypes from 'prop-types'
 const TitleContext = createContext()
 
+// 使用 useContext
 function Title () {
   const context = useContext(TitleContext)
   return (
@@ -20,13 +21,13 @@ function Title () {
   )
 }
 
+// 用于检查是否重复渲染
 const SubTitle = memo(function SubTitle (props) {
   console.log('subTitle')
   return (
     <h3 onClick={props.onClick}>{props.name}</h3>
   )
 })
-
 SubTitle.propTypes = {
   name: propTypes.string,
   onClick: propTypes.func
@@ -78,6 +79,7 @@ export default function Effect () {
 
   // useMemo 有点像 vue 的 computed
   const double = useMemo(() => count * 2, [count])
+
   // 改变 count 或其他值，会导致 Effect 函数重新执行，此时 subTitleClick 也会重新被赋值，导致传入 SubTitle 的函数不同，导致重复渲染 SubTitle 组件
   // 这里使用 useMemo 让函数唯一初始化
   // 如果返回的是函数，则 useCallback 是 useMemo 的简化
@@ -110,14 +112,13 @@ export default function Effect () {
       {/* 测试 useEffect */}
       <h2>1. Effect</h2>
       <h3>{count}</h3>
-      <button onClick={() => setCount(count + 1)}>计数+1</button>
-      <h3>{name}</h3>
-      <button onClick={() => setName(name + 'A')}>名字+A</button>
-
-      {/* 测试 useMemo */}
-      <h2>2. useMemo/useCallback</h2>
       <h3 ref={ref}>{double}</h3>
+      <button onClick={() => setCount(count + 1)}>计数+1</button>
+
+      {/* 测试 useMemo/useCallback */}
+      <h2>2. useMemo/useCallback</h2>
       <SubTitle name={name} onClick={subTitleClick}></SubTitle>
+      <button onClick={() => setName(name + 'A')}>名字+A</button>
 
       {/* 测试 useContext */}
       <h2>3. useContext</h2>

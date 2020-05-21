@@ -42,3 +42,9 @@ Notification API
 HTML 使用：`&#xf065;`
 
 JS 使用：`\uf065`
+
+## Redux 流程
+
+dispatch(action) -> reducer -> new state
+
+dispatch 后会触发所有 reducer，reducer 根据 action 更改并返回新的 state

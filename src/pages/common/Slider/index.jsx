@@ -25,12 +25,12 @@ function Slider (props) {
   const startHours = useMemo(() => Math.round((startPercent * 24) / 100), [startPercent])
   const endHours = useMemo(() => Math.round((endPercent * 24) / 100), [endPercent])
 
-  // 屏幕宽高
+  // 动态获取屏幕宽高
   const winSize = useWinSize()
   // 起点和终点实例
   const startBtn = useRef()
   const endBtn = useRef()
-  // 记录偏移量数据
+  // 偏移临时变量
   const lastStartX = useRef()
   const lastEndX = useRef()
   // 滑动条实例
