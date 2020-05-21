@@ -48,3 +48,11 @@ JS 使用：`\uf065`
 dispatch(action) -> reducer -> new state
 
 dispatch 后会触发所有 reducer，reducer 根据 action 更改并返回新的 state
+
+## 代码规范化
+
+使用 eslint + husky + lint-staged 保证代码格式的一致性
+
+后两个的配置见 `package.json`
+
+配置好后直接执行 `git commit -am [description]` 即可
